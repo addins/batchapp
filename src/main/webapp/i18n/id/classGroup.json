@@ -1,0 +1,24 @@
+{
+    "batchappApp": {
+        "classGroup" : {
+            "home": {
+                "title": "Class Groups",
+                "createLabel": "Buat Class Group baru",
+                "createOrEditLabel": "Buat atau edit Class Group"
+            },
+            "created": "Class Group dengan id {{ param }} telah dibuat",
+            "updated": "Class Group dengan id {{ param }} telah diperbaharui",
+            "deleted": "Class Group dengan id {{ param }} telah dihapus",
+            "delete": {
+                "question": "Apakah anda yakin ingin menghapus Class Group {{ id }}?"
+            },
+            "detail": {
+                "title": "Class Group"
+            },
+            "classCode": "Class Code",
+            "schoolType": "School Type",
+            "classLevel": "Class Level",
+            "student": "Student"
+        }
+    }
+}

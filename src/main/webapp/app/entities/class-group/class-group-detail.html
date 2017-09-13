@@ -1,0 +1,37 @@
+
+<div>
+    <h2><span data-translate="batchappApp.classGroup.detail.title">Class Group</span> {{vm.classGroup.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="batchappApp.classGroup.classCode">Class Code</span></dt>
+        <dd>
+            <span>{{vm.classGroup.classCode}}</span>
+        </dd>
+        <dt><span data-translate="batchappApp.classGroup.schoolType">School Type</span></dt>
+        <dd>
+            <span data-translate="{{'batchappApp.SchoolType.' + vm.classGroup.schoolType}}">{{vm.classGroup.schoolType}}</span>
+        </dd>
+        <dt><span data-translate="batchappApp.classGroup.classLevel">Class Level</span></dt>
+        <dd>
+            <span>{{vm.classGroup.classLevel}}</span>
+        </dd>
+        <dt><span data-translate="batchappApp.classGroup.student">Student</span></dt>
+        <dd>
+            <span ng-repeat="student in vm.classGroup.students">
+                <a ui-sref="student-detail({id: student.id})">{{student.regNum}}</a>{{$last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="class-group-detail.edit({id:vm.classGroup.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

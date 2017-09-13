@@ -1,0 +1,25 @@
+{
+    "batchappApp": {
+        "student" : {
+            "home": {
+                "title": "Students",
+                "createLabel": "Buat Student baru",
+                "createOrEditLabel": "Buat atau edit Student"
+            },
+            "created": "Student dengan id {{ param }} telah dibuat",
+            "updated": "Student dengan id {{ param }} telah diperbaharui",
+            "deleted": "Student dengan id {{ param }} telah dihapus",
+            "delete": {
+                "question": "Apakah anda yakin ingin menghapus Student {{ id }}?"
+            },
+            "detail": {
+                "title": "Student"
+            },
+            "regNum": "Reg Num",
+            "firstName": "First Name",
+            "lastName": "Last Name",
+            "gender": "Gender",
+            "classGroup": "Class Group"
+        }
+    }
+}

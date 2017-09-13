@@ -1,0 +1,10 @@
+{
+    "batchappApp": {
+        "SchoolType" : {
+            "null": "",
+            "PRIMARY_SCHOOL": "PRIMARY_SCHOOL",
+            "MIDDLE_SCHOOL": "MIDDLE_SCHOOL",
+            "HIGH_SCHOOL": "HIGH_SCHOOL"
+        }
+    }
+}

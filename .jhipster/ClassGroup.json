@@ -1,0 +1,46 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "student",
+            "otherEntityName": "student",
+            "relationshipType": "many-to-many",
+            "relationshipValidateRules": [],
+            "otherEntityField": "regNum",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "classGroup"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "classCode",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "minlength"
+            ],
+            "fieldValidateRulesMinlength": "1"
+        },
+        {
+            "fieldName": "schoolType",
+            "fieldType": "SchoolType",
+            "fieldValues": "PRIMARY_SCHOOL,MIDDLE_SCHOOL,HIGH_SCHOOL",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "classLevel",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20170913222512",
+    "dto": "mapstruct",
+    "service": "serviceClass",
+    "entityTableName": "class_group",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

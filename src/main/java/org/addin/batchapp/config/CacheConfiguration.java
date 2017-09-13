@@ -41,6 +41,10 @@ public class CacheConfiguration {
             cm.createCache(org.addin.batchapp.domain.User.class.getName(), jcacheConfiguration);
             cm.createCache(org.addin.batchapp.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(org.addin.batchapp.domain.User.class.getName() + ".authorities", jcacheConfiguration);
+            cm.createCache(org.addin.batchapp.domain.Student.class.getName(), jcacheConfiguration);
+            cm.createCache(org.addin.batchapp.domain.Student.class.getName() + ".classGroups", jcacheConfiguration);
+            cm.createCache(org.addin.batchapp.domain.ClassGroup.class.getName(), jcacheConfiguration);
+            cm.createCache(org.addin.batchapp.domain.ClassGroup.class.getName() + ".students", jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }
