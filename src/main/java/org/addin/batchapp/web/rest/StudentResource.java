@@ -1,14 +1,16 @@
 package org.addin.batchapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import io.github.jhipster.web.util.ResponseUtil;
+import io.swagger.annotations.ApiParam;
+import org.addin.batchapp.config.ImportStudentConfiguration;
+import org.addin.batchapp.service.StudentImportService;
+import org.addin.batchapp.service.StudentQueryService;
 import org.addin.batchapp.service.StudentService;
+import org.addin.batchapp.service.dto.StudentCriteria;
+import org.addin.batchapp.service.dto.StudentDTO;
 import org.addin.batchapp.web.rest.util.HeaderUtil;
 import org.addin.batchapp.web.rest.util.PaginationUtil;
-import org.addin.batchapp.service.dto.StudentDTO;
-import org.addin.batchapp.service.dto.StudentCriteria;
-import org.addin.batchapp.service.StudentQueryService;
-import io.swagger.annotations.ApiParam;
-import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -17,11 +19,13 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.File;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -38,10 +42,12 @@ public class StudentResource {
 
     private final StudentService studentService;
     private final StudentQueryService studentQueryService;
+    private final StudentImportService studentImportService;
 
-    public StudentResource(StudentService studentService, StudentQueryService studentQueryService) {
+    public StudentResource(StudentService studentService, StudentQueryService studentQueryService, StudentImportService studentImportService) {
         this.studentService = studentService;
         this.studentQueryService = studentQueryService;
+        this.studentImportService = studentImportService;
     }
 
     /**
@@ -62,6 +68,19 @@ public class StudentResource {
         return ResponseEntity.created(new URI("/api/students/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
+    }
+
+    @PostMapping("/students/import")
+    @Timed
+    public void importStudents(MultipartFile file) throws IOException {
+        log.debug("REST request to import Student from file {}", file.getOriginalFilename());
+        String contentType = file.getContentType();
+        if (!contentType.equalsIgnoreCase("text/csv")) {
+            throw new IllegalArgumentException("Only text/csv is supported");
+        }
+        File csvFile = new File(ImportStudentConfiguration.createAbsoluteCSVFileName());
+        file.transferTo(csvFile);
+        studentImportService.importFromFile(csvFile);
     }
 
     /**

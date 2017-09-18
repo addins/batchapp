@@ -1,16 +1,15 @@
 package org.addin.batchapp.web.rest;
 
 import org.addin.batchapp.BatchappApp;
-
 import org.addin.batchapp.domain.Student;
+import org.addin.batchapp.domain.enumeration.Gender;
 import org.addin.batchapp.repository.StudentRepository;
+import org.addin.batchapp.service.StudentImportService;
+import org.addin.batchapp.service.StudentQueryService;
 import org.addin.batchapp.service.StudentService;
 import org.addin.batchapp.service.dto.StudentDTO;
 import org.addin.batchapp.service.mapper.StudentMapper;
 import org.addin.batchapp.web.rest.errors.ExceptionTranslator;
-import org.addin.batchapp.service.dto.StudentCriteria;
-import org.addin.batchapp.service.StudentQueryService;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,8 +31,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-import org.addin.batchapp.domain.enumeration.Gender;
 /**
  * Test class for the StudentResource REST controller.
  *
@@ -68,6 +65,9 @@ public class StudentResourceIntTest {
     private StudentQueryService studentQueryService;
 
     @Autowired
+    private StudentImportService studentImportService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -86,7 +86,7 @@ public class StudentResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final StudentResource studentResource = new StudentResource(studentService, studentQueryService);
+        final StudentResource studentResource = new StudentResource(studentService, studentQueryService, studentImportService);
         this.restStudentMockMvc = MockMvcBuilders.standaloneSetup(studentResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
