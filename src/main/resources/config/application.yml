@@ -45,6 +45,9 @@ spring:
             enabled: false
     thymeleaf:
         mode: XHTML
+    batch:
+        job:
+            enabled: false
 
 security:
     basic:
